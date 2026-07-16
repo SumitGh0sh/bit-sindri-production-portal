@@ -835,7 +835,6 @@ export default function ProductionPortal() {
             paddingBottom: 2
           }}>
             {[
-              ...(foundStudent ? [{ id: 0, label: "Report Card" }] : []),
               { id: 1, label: "Toppers" },
               { id: 2, label: "Class Analytics" },
               { id: 3, label: "Student Ledger" }
