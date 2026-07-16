@@ -787,7 +787,10 @@ export default function ProductionPortal() {
             padding: 3,
             borderRadius: 8,
             border: `1px solid ${C.border}`,
-            gap: 2
+            gap: 2,
+            overflowX: "auto",
+            maxWidth: "100%",
+            scrollbarWidth: "none"
           }}>
             {[
               { id: "1", label: "Semester 1" },
@@ -809,6 +812,7 @@ export default function ProductionPortal() {
                   fontSize: 11,
                   fontWeight: 700,
                   cursor: "pointer",
+                  whiteSpace: "nowrap",
                   transition: "all 0.2s"
                 }}
               >
@@ -818,7 +822,14 @@ export default function ProductionPortal() {
           </div>
 
           {/* Rightaligned View Buttons */}
-          <div style={{ display: "flex", gap: 4 }}>
+          <div style={{
+            display: "flex",
+            gap: 4,
+            overflowX: "auto",
+            maxWidth: "100%",
+            scrollbarWidth: "none",
+            paddingBottom: 2
+          }}>
             {[
               ...(foundStudent ? [{ id: 0, label: "Report Card" }] : []),
               { id: 1, label: "Toppers" },
@@ -840,6 +851,7 @@ export default function ProductionPortal() {
                   display: "flex",
                   alignItems: "center",
                   gap: 6,
+                  whiteSpace: "nowrap",
                   transition: "all 0.2s"
                 }}
               >
