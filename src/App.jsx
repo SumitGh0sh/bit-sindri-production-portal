@@ -858,7 +858,7 @@ export default function ProductionPortal() {
         {tab === 0 && (
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             {/* Search Input Forms Card when no student is found */}
-            {!foundStudent && (
+            {(!foundStudent || (compareMode && !battleActive)) && (
               <div style={{ maxWidth: 800, width: "100%", margin: "0 auto" }}>
                 <Card theme={C}>
                   <div style={{ padding: 28 }}>
