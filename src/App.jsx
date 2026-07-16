@@ -109,7 +109,7 @@ export default function ProductionPortal() {
 
   // Sound FX logic
   useEffect(() => {
-    sfx.setMute(!soundEnabled);
+    sfx.setMuted(!soundEnabled);
   }, [soundEnabled]);
 
   const toggleSound = () => {
