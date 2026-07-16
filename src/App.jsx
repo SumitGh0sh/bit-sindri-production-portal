@@ -790,6 +790,8 @@ export default function ProductionPortal() {
             gap: 2,
             overflowX: "auto",
             maxWidth: "100%",
+            minWidth: 0,
+            flexShrink: 1,
             scrollbarWidth: "none"
           }}>
             {[
@@ -827,6 +829,8 @@ export default function ProductionPortal() {
             gap: 4,
             overflowX: "auto",
             maxWidth: "100%",
+            minWidth: 0,
+            flexShrink: 1,
             scrollbarWidth: "none",
             paddingBottom: 2
           }}>
