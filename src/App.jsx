@@ -6,8 +6,8 @@ import { STUDENTS, studentRanks, getCharacterClass, getAvatarUrl } from "./data/
 import { getUnlockedAchievements } from "./data/achievements";
 import RadarChart from "./components/RadarChart";
 import { Card, Button } from "./components/UIComponents";
+import logoImg from "./assets/logo.png";
 
-// Navigation Tab Icon Helper from original BCA portal
 const renderTabIcon = (id, active, C) => {
   const color = active ? C.gold : C.muted;
   const strokeWidth = 2.2;
@@ -662,25 +662,18 @@ export default function ProductionPortal() {
               <div style={{
                 width: 34,
                 height: 34,
-                borderRadius: 8,
-                background: C.surface,
-                border: `1px solid ${C.borderHi}`,
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                fontSize: 15,
-                fontWeight: 700,
-                fontFamily: "monospace",
-                color: C.gold
+                justifyContent: "center"
               }}>
-                B
+                <img src={logoImg} style={{ width: "100%", height: "100%", objectFit: "contain" }} alt="B.I.T. Sindri Logo" />
               </div>
               <div>
                 <div style={{ fontSize: 9, color: C.dim, fontWeight: 600 }}>
                   B.I.T. Sindri
                 </div>
                 <h1 style={{ fontSize: isMobile ? 14 : 17, fontWeight: 700, color: C.text, margin: "1px 0 0" }}>
-                  Production and Industrial Engineering Academic Portal
+                  {isMobile ? "PE Academic Result Portal" : "Production and Industrial Engineering Academic Portal"}
                 </h1>
               </div>
             </div>
