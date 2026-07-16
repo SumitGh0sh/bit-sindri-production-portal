@@ -904,6 +904,7 @@ export default function ProductionPortal() {
                             onChange={(e) => setRoll(e.target.value)}
                             onFocus={() => setRollFocused(true)}
                             onBlur={() => setTimeout(() => setRollFocused(false), 200)}
+                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleSearch(); } }}
                             placeholder="e.g. 24030570011"
                             style={{ width: "100%", padding: "8px 12px", borderRadius: 8, border: `1px solid ${C.border}`, background: C.raised, color: C.text, fontSize: 13, boxSizing: "border-box" }}
                           />
@@ -939,6 +940,7 @@ export default function ProductionPortal() {
                             onChange={(e) => setName(e.target.value)}
                             onFocus={() => setNameFocused(true)}
                             onBlur={() => setTimeout(() => setNameFocused(false), 200)}
+                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleSearch(); } }}
                             placeholder="e.g. AMLESHWAR PRASAD"
                             style={{ width: "100%", padding: "8px 12px", borderRadius: 8, border: `1px solid ${C.border}`, background: C.raised, color: C.text, fontSize: 13, boxSizing: "border-box" }}
                           />
@@ -976,6 +978,7 @@ export default function ProductionPortal() {
                               onChange={(e) => setRoll(e.target.value)}
                               onFocus={() => setRollFocused(true)}
                               onBlur={() => setTimeout(() => setRollFocused(false), 200)}
+                              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInitiateBattle(); } }}
                               placeholder="Player 1 Roll e.g. 24030570011"
                               style={{ width: "100%", padding: "8px 12px", borderRadius: 8, border: `1px solid ${C.border}`, background: C.raised, color: C.text, fontSize: 13, boxSizing: "border-box" }}
                             />
@@ -997,6 +1000,7 @@ export default function ProductionPortal() {
                               onChange={(e) => setName(e.target.value)}
                               onFocus={() => setNameFocused(true)}
                               onBlur={() => setTimeout(() => setNameFocused(false), 200)}
+                              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInitiateBattle(); } }}
                               placeholder="Player 1 Name e.g. AMLESHWAR PRASAD"
                               style={{ width: "100%", padding: "8px 12px", borderRadius: 8, border: `1px solid ${C.border}`, background: C.raised, color: C.text, fontSize: 13, boxSizing: "border-box" }}
                             />
@@ -1023,6 +1027,7 @@ export default function ProductionPortal() {
                               onChange={(e) => setOppRoll(e.target.value)}
                               onFocus={() => setOppRollFocused(true)}
                               onBlur={() => setTimeout(() => setOppRollFocused(false), 200)}
+                              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInitiateBattle(); } }}
                               placeholder="Player 2 Roll e.g. 24030570022"
                               style={{ width: "100%", padding: "8px 12px", borderRadius: 8, border: `1px solid ${C.border}`, background: C.raised, color: C.text, fontSize: 13, boxSizing: "border-box" }}
                             />
@@ -1044,6 +1049,7 @@ export default function ProductionPortal() {
                               onChange={(e) => setOppName(e.target.value)}
                               onFocus={() => setOppNameFocused(true)}
                               onBlur={() => setTimeout(() => setOppNameFocused(false), 200)}
+                              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInitiateBattle(); } }}
                               placeholder="Player 2 Name e.g. HARSH KUMAR"
                               style={{ width: "100%", padding: "8px 12px", borderRadius: 8, border: `1px solid ${C.border}`, background: C.raised, color: C.text, fontSize: 13, boxSizing: "border-box" }}
                             />
