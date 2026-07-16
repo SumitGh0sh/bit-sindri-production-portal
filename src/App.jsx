@@ -664,9 +664,12 @@ export default function ProductionPortal() {
                 height: 34,
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center",
+                borderRadius: 6,
+                overflow: "hidden",
+                background: "#ffffff"
               }}>
-                <img src={logoImg} style={{ width: "100%", height: "100%", objectFit: "contain" }} alt="B.I.T. Sindri Logo" />
+                <img src={logoImg} style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: 6 }} alt="B.I.T. Sindri Logo" />
               </div>
               <div>
                 <div style={{ fontSize: 9, color: C.dim, fontWeight: 600 }}>
