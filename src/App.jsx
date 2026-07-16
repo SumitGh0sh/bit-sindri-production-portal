@@ -681,11 +681,20 @@ export default function ProductionPortal() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    color: C.text
+                    color: C.text,
+                    transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)"
                   }}
-                  title="Search Student"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = C.borderHi;
+                    e.currentTarget.style.background = C.raised;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.background = C.surface;
+                  }}
+                  title="Search New Student"
                 >
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                   </svg>
@@ -709,12 +718,30 @@ export default function ProductionPortal() {
                   alignItems: "center",
                   justifyContent: "center",
                   color: C.text,
-                  fontSize: 13
+                  transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)"
                 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = C.borderHi;
+                  e.currentTarget.style.background = C.raised;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = C.border;
+                  e.currentTarget.style.background = C.surface;
+                }}
+                title={theme === "dark" ? "Light Mode" : "Dark Mode"}
               >
-                {theme === "dark" ? "☀️" : "🌙"}
+                {theme === "dark" ? (
+                  <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                  </svg>
+                ) : (
+                  <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+                  </svg>
+                )}
               </button>
             </div>
+
           </div>
         </div>
       </header>
@@ -1349,6 +1376,126 @@ export default function ProductionPortal() {
                 </div>
               </div>
             </Card>
+
+            {/* List of top 10 students (Toppers Ledger) */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 16 }}>
+              <div style={{ fontSize: 11, fontWeight: 800, color: C.dim, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 4 }}>Toppers Ledger</div>
+              {(() => {
+                let sortedList = [...STUDENTS].sort((a, b) => {
+                  const getScore = st => {
+                    if (topperSubject === "sem1") return parseFloat(st.sem1.sgpa);
+                    if (topperSubject === "sem2") return parseFloat(st.sem2.sgpa);
+                    return (parseFloat(st.sem1.sgpa) + parseFloat(st.sem2.sgpa)) / 2;
+                  };
+                  return getScore(b) - getScore(a);
+                });
+
+                return sortedList.slice(0, 10).map((st, idx) => {
+                  const sg1 = parseFloat(st.sem1.sgpa);
+                  const sg2 = parseFloat(st.sem2.sgpa);
+                  const cg = (sg1 + sg2) / 2;
+                  const score = topperSubject === "sem1" ? sg1 : (topperSubject === "sem2" ? sg2 : cg);
+
+                  return (
+                    <Card
+                      theme={C}
+                      key={st.rollNo}
+                      onClick={() => {
+                        setFoundStudent(st);
+                        setRoll(st.rollNo);
+                        setName("");
+                        sfx.playSelect();
+                        setTab(0);
+                      }}
+                      style={{ cursor: "pointer", transition: "border-color 0.2s" }}
+                      title={`View ${st.name}'s Profile`}
+                    >
+                      <div style={{ padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14 }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                          <div style={{
+                            width: 28,
+                            height: 28,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}>
+                            {idx < 3 ? (
+                              <div style={{
+                                width: 24,
+                                height: 24,
+                                borderRadius: "50%",
+                                background: idx === 0 ? C.gold + "15" : idx === 1 ? C.muted + "15" : "#b4530915",
+                                border: `1.5px solid ${idx === 0 ? C.gold : idx === 1 ? C.borderHi : "#b45309"}`,
+                                color: idx === 0 ? C.gold : idx === 1 ? C.text : "#f59e0b",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                fontWeight: 800,
+                                fontSize: 11
+                              }}>
+                                {idx + 1}
+                              </div>
+                            ) : (
+                              <span style={{ fontSize: 12, fontWeight: "600", color: C.dim }}>
+                                #{idx + 1}
+                              </span>
+                            )}
+                          </div>
+
+                          <div style={{
+                            width: 32,
+                            height: 32,
+                            borderRadius: "50%",
+                            background: C.raised,
+                            border: `1px solid ${C.border}`,
+                            overflow: "hidden",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexShrink: 0
+                          }}>
+                            <img
+                              src={getAvatarUrl(st)}
+                              alt={`${st.name}'s Avatar`}
+                              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                            />
+                          </div>
+
+                          <div>
+                            <div style={{ fontWeight: 700, color: C.text }}>{st.name}</div>
+                            <div style={{ fontSize: 11, color: C.dim, fontFamily: "monospace", marginTop: 1 }}>{st.rollNo}</div>
+                          </div>
+                        </div>
+
+                        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+                          <div style={{ textAlign: "right" }}>
+                            <span style={{ fontSize: 18, fontWeight: 800, color: idx === 0 ? C.gold : C.text }}>
+                              {score.toFixed(2)}
+                            </span>
+                            <span style={{ fontSize: 12, color: C.dim }}>/10</span>
+                          </div>
+
+                          {!isMobile && (
+                            <div style={{
+                              fontSize: 10,
+                              fontWeight: 800,
+                              color: C.gold,
+                              border: `1px solid ${C.gold}30`,
+                              background: `${C.gold}10`,
+                              padding: "3px 8px",
+                              borderRadius: 4,
+                              textTransform: "uppercase"
+                            }}>
+                              SGPA/CGPA: {score.toFixed(2)}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </Card>
+                  );
+                });
+              })()}
+            </div>
           </div>
         )}
 
@@ -1463,6 +1610,78 @@ export default function ProductionPortal() {
                 </div>
               </Card>
             </div>
+
+            {/* Individual student trends comparisons */}
+            <Card theme={C}>
+              <div style={{ padding: 24 }}>
+                <h4 style={{ margin: "0 0 16px", fontSize: 14, fontWeight: 700, color: C.text, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                  Individual Student Performance Trend (CGPA Chart)
+                </h4>
+                <div className="aesthetic-scrollbar" style={{
+                  display: "flex",
+                  alignItems: "flex-end",
+                  gap: isMobile ? 8 : 12,
+                  height: 165,
+                  overflowX: "auto",
+                  paddingBottom: 8,
+                  marginTop: 14,
+                  WebkitOverflowScrolling: "touch"
+                }}>
+                  {STUDENTS.map((st) => {
+                    const sg1 = parseFloat(st.sem1.sgpa);
+                    const sg2 = parseFloat(st.sem2.sgpa);
+                    const cGpa = (sg1 + sg2) / 2;
+                    const h = cGpa * 12; // height in pixels (0 to 120px)
+                    const fill = cGpa >= 8.5
+                      ? C.gold
+                      : cGpa >= 7.5
+                        ? "#818cf8"
+                        : cGpa >= 6.5
+                          ? "#6366f1"
+                          : C.red;
+                    
+                    return (
+                      <div
+                        key={st.rollNo}
+                        title={`${st.name}: CGPA ${cGpa.toFixed(2)}`}
+                        onClick={() => {
+                          setFoundStudent(st);
+                          setRoll(st.rollNo);
+                          setName("");
+                          sfx.playSelect();
+                          setTab(0);
+                        }}
+                        style={{
+                          flex: "0 0 auto",
+                          minWidth: isMobile ? 22 : 32,
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "flex-end",
+                          height: 140,
+                          cursor: "pointer"
+                        }}
+                      >
+                        <div style={{ fontSize: 9, fontWeight: 700, color: C.dim, width: "100%", textAlign: "center", marginBottom: 4 }}>{cGpa.toFixed(2)}</div>
+                        <div style={{ width: "100%", height: `${h}px`, background: fill, borderRadius: "4px 4px 0 0", opacity: 0.8, transition: "height 0.3s ease" }} />
+                        <div style={{
+                          fontSize: 8,
+                          color: C.dim,
+                          width: "100%",
+                          overflow: "hidden",
+                          whiteSpace: "nowrap",
+                          textOverflow: "ellipsis",
+                          textAlign: "center",
+                          marginTop: 4
+                        }}>
+                          {st.name.split(" ")[0]}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </Card>
           </div>
         )}
 
