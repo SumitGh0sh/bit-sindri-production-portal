@@ -122,16 +122,16 @@ export default function ProductionPortal() {
   // Color theme configurations
   const C = {
     background: theme === "dark" ? "#010102" : "#fafafb",
-    surface: theme === "dark" ? "#0b0c10" : "#ffffff",
-    raised: theme === "dark" ? "#12131a" : "#f1f3f6",
-    border: theme === "dark" ? "#1f222d" : "#e4e7eb",
-    text: theme === "dark" ? "#f3f4f6" : "#1f2937",
-    muted: theme === "dark" ? "#9ca3af" : "#6b7280",
-    dim: theme === "dark" ? "#6b7280" : "#9ca3af",
+    surface: theme === "dark" ? "#0f1011" : "#ffffff",
+    raised: theme === "dark" ? "#141516" : "#f4f5f6",
+    border: theme === "dark" ? "#23252a" : "#e4e4e7",
+    text: theme === "dark" ? "#f7f8f8" : "#18181b",
+    muted: theme === "dark" ? "#d0d6e0" : "#71717a",
+    dim: theme === "dark" ? "#8a8f98" : "#a1a1aa",
     gold: "#5e6ad2", // Periwinkle Primary Accent
     amber: "#f59e0b", // Gold/Amber Secondary Accent
-    green: "#10b981", // Success green
-    red: "#ef4444" // Warning red
+    green: theme === "dark" ? "#27a644" : "#10b981", // Success green
+    red: theme === "dark" ? "#f43f5e" : "#ef4444" // Rose/Red
   };
 
   useEffect(() => {

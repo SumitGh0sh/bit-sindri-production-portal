@@ -93,14 +93,23 @@ STUDENTS.forEach((st) => {
 });
 
 export const getCharacterClass = (cgpa) => {
-  const cg = parseFloat(cgpa);
-  if (cg >= 9.0) return { title: "Production Archmage", color: "#f59e0b", glow: "rgba(245, 158, 11, 0.4)", desc: "Absolute master of industrial systems and academic theory." };
-  if (cg >= 8.0) return { title: "Production Specialist", color: "#5e6ad2", glow: "rgba(94, 106, 210, 0.4)", desc: "Highly skilled strategist of optimized operations." };
-  if (cg >= 7.0) return { title: "Industrial Vanguard", color: "#10b981", glow: "rgba(16, 185, 129, 0.4)", desc: "Resilient analyst leading calculations on the workshop floor." };
-  if (cg >= 6.0) return { title: "Operations Recruit", color: "#3b82f6", glow: "rgba(59, 130, 246, 0.4)", desc: "Eager explorer of production engineering concepts." };
-  return { title: "Academic Survivor", color: "#ef4444", glow: "rgba(239, 68, 68, 0.4)", desc: "Fighting the variables of industrial trials." };
+  const g = parseFloat(cgpa);
+  if (g >= 9.0) return { title: "S-Class Sage", color: "#a855f7", glow: "rgba(168, 85, 247, 0.4)", desc: "Unrivaled academic master of the industrial realm." };
+  if (g >= 8.0) return { title: "A-Class Specialist", color: "#5e6ad2", glow: "rgba(94, 106, 210, 0.4)", desc: "Highly skilled strategist and operations wizard." };
+  if (g >= 7.0) return { title: "B-Class Spellsword", color: "#10b981", glow: "rgba(16, 185, 129, 0.4)", desc: "Balanced theorist and practical plant code warrior." };
+  if (g >= 6.0) return { title: "C-Class Vanguard", color: "#f59e0b", glow: "rgba(245, 158, 11, 0.4)", desc: "Determined operator navigating complex systems." };
+  if (g >= 5.0) return { title: "D-Class Initiate", color: "#6b7280", glow: "rgba(107, 114, 128, 0.4)", desc: "Apprentice scholar gathering credits and calculations." };
+  return { title: "F-Class Challenger", color: "#ef4444", glow: "rgba(239, 68, 68, 0.4)", desc: "Quest active: Rebuild focus to unlock hidden potentials." };
 };
 
 export const getAvatarUrl = (student) => {
-  return "https://api.dicebear.com/7.x/adventurer/svg?seed=" + encodeURIComponent(student.name);
+  if (!student) return "";
+  const seed = encodeURIComponent(student.name);
+  if (student.gender === "F") {
+    // Female chibi anime avatar (Lorelei style with long/styled hair)
+    return `https://api.dicebear.com/7.x/lorelei/svg?seed=${seed}&hair=variant01,variant02,variant03,variant04,variant05,variant06,variant07,variant08,variant09,variant10,variant11,variant12,variant13,variant14,variant15,variant16,variant17,variant18,variant19,variant20,variant21,variant22,variant23,variant24`;
+  } else {
+    // Male chibi anime avatar (Lorelei style with short/spiky hair)
+    return `https://api.dicebear.com/7.x/lorelei/svg?seed=${seed}&hair=variant25,variant26,variant27,variant28,variant29,variant30,variant31,variant32,variant33,variant34,variant35,variant36,variant37,variant38,variant39,variant40,variant41,variant42,variant43,variant44,variant45,variant46,variant47,variant48`;
+  }
 };
