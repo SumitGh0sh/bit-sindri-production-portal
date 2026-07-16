@@ -193,37 +193,41 @@ export default function ProductionPortal() {
   const selectSuggestedStudent = (student, searchType) => {
     if (searchType === "name") {
       setName(student.name);
-      setRoll("");
+      setRoll(student.rollNo);
     } else {
       setRoll(student.rollNo);
-      setName("");
+      setName(student.name);
     }
     setNameFocused(false);
     setRollFocused(false);
-    setBattleActive(false);
     sfx.playSelect();
-    setTimeout(() => {
+    
+    if (!compareMode) {
+      setBattleActive(false);
+      setTimeout(() => {
+        setFoundStudent(student);
+        setSearchError("");
+        setTab(0);
+      }, 200);
+    } else {
       setFoundStudent(student);
       setSearchError("");
-      setTab(0);
-    }, 200);
+    }
   };
 
   const selectSuggestedOpponent = (student, searchType) => {
     if (searchType === "name") {
       setOppName(student.name);
-      setOppRoll("");
+      setOppRoll(student.rollNo);
     } else {
       setOppRoll(student.rollNo);
-      setOppName("");
+      setOppName(student.name);
     }
     setOppNameFocused(false);
     setOppRollFocused(false);
     sfx.playSelect();
-    setTimeout(() => {
-      setOpponentStudent(student);
-      setSearchError("");
-    }, 200);
+    setOpponentStudent(student);
+    setSearchError("");
   };
 
   // Search logic
@@ -257,40 +261,63 @@ export default function ProductionPortal() {
 
   // Initiate battle duel comparison
   const handleInitiateBattle = () => {
-    if (!foundStudent) {
-      setSearchError("Find Player 1 profile first.");
-      sfx.playError();
-      return;
+    setSearchError("");
+    
+    // Resolve Player 1
+    let p1 = foundStudent;
+    if (!p1) {
+      const r1 = roll.trim().toUpperCase();
+      const n1 = name.trim().toUpperCase();
+      if (!r1 && !n1) {
+        setSearchError("Please fill in Player 1 Roll No or Name.");
+        sfx.playError();
+        return;
+      }
+      p1 = STUDENTS.find((st) => {
+        const matchRoll = r1 && st.rollNo.toUpperCase() === r1;
+        const matchName = n1 && st.name.toUpperCase().includes(n1);
+        return matchRoll || matchName;
+      });
+      if (!p1) {
+        setSearchError("Player 1 student record not found.");
+        sfx.playError();
+        return;
+      }
     }
-    const r = oppRoll.trim().toUpperCase();
-    const n = oppName.trim().toUpperCase();
 
-    if (!r && !n) {
+    // Resolve Player 2
+    const r2 = oppRoll.trim().toUpperCase();
+    const n2 = oppName.trim().toUpperCase();
+
+    if (!r2 && !n2) {
       setSearchError("Please fill in Player 2 Roll No or Name.");
       sfx.playError();
       return;
     }
 
-    const opp = STUDENTS.find((st) => {
-      const matchRoll = r && st.rollNo.toUpperCase() === r;
-      const matchName = n && st.name.toUpperCase().includes(n);
+    const p2 = STUDENTS.find((st) => {
+      const matchRoll = r2 && st.rollNo.toUpperCase() === r2;
+      const matchName = n2 && st.name.toUpperCase().includes(n2);
       return matchRoll || matchName;
     });
 
-    if (opp) {
-      if (opp.rollNo === foundStudent.rollNo) {
-        setSearchError("Cannot duel/compare the same student.");
-        sfx.playError();
-        return;
-      }
-      setOpponentStudent(opp);
-      setBattleActive(true);
-      sfx.playLevelUp(); // play success level up chime
-    } else {
+    if (!p2) {
       setSearchError("Player 2 student record not found.");
       sfx.playError();
       setBattleActive(false);
+      return;
     }
+
+    if (p1.rollNo === p2.rollNo) {
+      setSearchError("Cannot duel/compare the same student.");
+      sfx.playError();
+      return;
+    }
+
+    setFoundStudent(p1);
+    setOpponentStudent(p2);
+    setBattleActive(true);
+    sfx.playLevelUp(); // play success level up chime
   };
 
   // Pre-calculated cohort metrics for Cohort Analytics view
