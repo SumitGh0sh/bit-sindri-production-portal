@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Linear-inspired Grid Backgrounds */
+body.dark-theme-grid {
+  background-color: #010102;
+  background-image: 
+    radial-gradient(at top center, rgba(94, 106, 210, 0.12) 0px, transparent 65%),
+    linear-gradient(rgba(35, 37, 42, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(35, 37, 42, 0.25) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px, 24px 24px;
+}
+
+body.light-theme-grid {
+  background-color: #fafafb;
+  background-image: 
+    radial-gradient(at top center, rgba(94, 106, 210, 0.04) 0px, transparent 65%),
+    linear-gradient(rgba(228, 228, 231, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(228, 228, 231, 0.5) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px, 24px 24px;
+}
+
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(94, 106, 210, 0.1);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(94, 106, 210, 0.25);
+}
+
+/* Animations and helpers */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+button, input, select {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Custom Typographic and Tracking Adjustments */
+.heading-display {
+  letter-spacing: -0.03em;
+}
+
+.heading-section {
+  letter-spacing: -0.02em;
+}
+
+.heading-card {
+  letter-spacing: -0.01em;
+}
+
+.eyebrow {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Custom glow effect */
+.scorecard-glow {
+  box-shadow: 0 0 40px rgba(94, 106, 210, 0.15);
+}
+
+/* Shadcn-like visual improvements */
+.shadcn-input:focus {
+  border-color: var(--focus-border, #5e6ad2) !important;
+  box-shadow: 0 0 0 3px var(--focus-ring, rgba(94, 106, 210, 0.2)) !important;
+}
+
+.shadcn-select:focus {
+  border-color: var(--focus-border, #5e6ad2) !important;
+  box-shadow: 0 0 0 3px var(--focus-ring, rgba(94, 106, 210, 0.2)) !important;
+}
+/* Custom scrollbar and swipe indicator for responsive tables */
+.aesthetic-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(94, 106, 210, 0.35) rgba(255, 255, 255, 0.03);
+}
+
+.aesthetic-scrollbar::-webkit-scrollbar {
+  height: 5px;
+}
+
+.aesthetic-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 99px;
+}
+
+.aesthetic-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(94, 106, 210, 0.35);
+  border-radius: 99px;
+}
+
+.aesthetic-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(94, 106, 210, 0.55);
+}
+
+@keyframes swipeLeft {
+  0%, 100% { transform: translateX(0); opacity: 0.5; }
+  50% { transform: translateX(-4px); opacity: 1; }
+}
+
+@keyframes swipeRight {
+  0%, 100% { transform: translateX(0); opacity: 0.5; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+.swipe-arrow-left {
+  display: inline-block;
+  animation: swipeLeft 1.5s infinite ease-in-out;
+}
+
+.swipe-arrow-right {
+  display: inline-block;
+  animation: swipeRight 1.5s infinite ease-in-out;
+}
